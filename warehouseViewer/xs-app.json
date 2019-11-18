@@ -1,0 +1,14 @@
+{
+	"welcomeFile": "webapp/index.html",
+	"authenticationMethod": "route",
+	"logout": {
+		"logoutEndpoint": "/do/logout"
+	},
+	"routes": [{
+		"source": "/node/(.*)$",
+		"target": "$1",
+		"authenticationType": "none",
+		"destination": "srv_api",
+		"csrfProtection": false
+	}]
+}

@@ -1,0 +1,182 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "warehouseViewer.warehouseViewer",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"warehouseService": {
+				"uri": "/srv_api/warehouse/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"warehouseBinTypeService": {
+				"uri": "/srv_api/warehouse-bin-type/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"resourceService": {
+				"uri": "/srv_api/resource/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": false,
+		"rootView": {
+			"viewName": "warehouseViewer.warehouseViewer.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "App"
+		},
+		"dependencies": {
+			"minUI5Version": "1.71.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ui.vk": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "warehouseViewer.warehouseViewer.i18n.i18n"
+				}
+			},
+			"warehouseBins": {
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"settings": {
+					"operationMode": "Server",
+					"synchronizationMode": "None",
+					"groupId": "$auto",
+					"autoExpandSelect": true
+				},
+				"dataSource": "warehouseService",
+				"preload": false
+			},
+			"warehouseBinTypes": {
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"settings": {
+					"operationMode": "Server",
+					"synchronizationMode": "None",
+					"groupId": "$auto",
+					"autoExpandSelect": true
+				},
+				"dataSource": "warehouseBinTypeService",
+				"preload": false
+			},
+			"whseBinsJSON": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"whseBinTypesJSON": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"whseResourcesJSON": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"resourceData": {
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"settings": {
+					"operationMode": "Server",
+					"synchronizationMode": "None",
+					"groupId": "$auto",
+					"autoExpandSelect": true
+				},
+				"dataSource": "resourceService",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "warehouseViewer.warehouseViewer.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [{
+				"name": "home",
+				"pattern": "",
+				"target": ["home"]
+			}, {
+				"name": "warehouse",
+				"pattern": "warehouse",
+				"target": ["warehouse"]
+			},{
+				"name": "page",
+				"pattern": "page",
+				"target": ["page"]
+			},{
+				"name": "grid",
+				"pattern": "grid",
+				"target": ["grid"]
+			}],
+			"targets": {
+				"home": {
+					"transition": "slide",
+					"viewName": "Home"
+				},
+				"warehouse": {
+					"transition": "slide",
+					"viewName": "whseView"
+				},
+				"page": {
+					"transition": "slide",
+					"viewName": "Page"
+				},
+				"grid": {
+					"transition": "slide",
+					"viewName": "Grid"
+				}
+			}
+		}
+	}
+}
