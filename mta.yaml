@@ -1,0 +1,39 @@
+ID: ic2019WhseVizOnHANA
+_schema-version: "2.1"
+description: IC2019 Project ported to HANA XSA
+version: 0.0.1
+modules:
+  - name: ic2019WhseVizOnHANA-db
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: ic2019WhseVizOnHANA-db-hdi-container
+  - name: ic2019WhseVizOnHANA-srv
+    type: nodejs
+    path: srv
+    parameters:
+      memory: 512M
+      disk-quota: 256M
+    provides:
+      - name: srv_api
+        properties:
+          url: ${default-url}
+    requires:
+      - name: ic2019WhseVizOnHANA-db-hdi-container
+      - name: ic2019WhseVizOnHANA-uaa
+resources:
+  - name: ic2019WhseVizOnHANA-db-hdi-container
+    type: com.sap.xs.hdi-container
+    properties:
+      hdi-container-name: ${service-name}
+  - name: ic2019WhseVizOnHANA-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: default
+      service: xsuaa
+      config:
+        xsappname: ic2019WhseVizOnHANA
+        tenant-mode: dedicated
