@@ -47,3 +47,4 @@ resources:
       config:
         xsappname: ic2019WhseVizOnHANA
         tenant-mode: dedicated
+      path: ./xs-security.json
