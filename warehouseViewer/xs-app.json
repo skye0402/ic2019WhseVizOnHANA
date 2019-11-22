@@ -10,5 +10,12 @@
 		"authenticationType": "xsuaa",
 		"destination": "srv_api",
 		"csrfProtection": false
+	}, {
+		"source": "/(.*)",
+		"localDir": "resources",
+		"authenticationType": "xsuaa",
+		"replace": {
+			"pathSuffixes": ["index.html"]
+		}
 	}]
 }

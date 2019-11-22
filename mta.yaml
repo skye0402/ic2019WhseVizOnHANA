@@ -40,11 +40,11 @@ resources:
     properties:
       hdi-container-name: '${service-name}'
   - name: ic2019WhseVizOnHANA-uaa
-    type: org.cloudfoundry.managed-service
+    type: com.sap.xs.uaa-space
     parameters:
       service-plan: default
       service: xsuaa
       config:
         xsappname: ic2019WhseVizOnHANA
         tenant-mode: dedicated
-      path: ./xs-security.json
+      config-path: ./xs-security.json
