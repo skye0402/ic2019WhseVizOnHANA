@@ -9,6 +9,8 @@ modules:
     parameters:
       memory: 64M
       disk-quota: 64M
+    requires:
+      - name: ic2019WhseVizOnHANA-db-hdi-container
   - name: ic2019WhseVizOnHANA-srv
     type: nodejs
     path: srv
