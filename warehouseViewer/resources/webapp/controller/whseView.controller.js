@@ -314,7 +314,7 @@ sap.ui.define([
 			o3DText.position.z = 0; 
 			o3DText.rotation.y = Math.PI;
 
-			let sModelName = "resources/models3D/" + oResource.model3D + ".gltf";
+			let sModelName = "resources/models3D/" + oResource.model3D;
 			oLoader.load(sModelName, function (gltf) {
 				gltf.scene.traverse(function (node) {
 					if (node instanceof THREE.Mesh) {
